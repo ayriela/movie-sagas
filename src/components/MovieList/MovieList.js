@@ -12,7 +12,7 @@ class MovieList extends Component {
   render() {
     return (
       <div className="flex-container">
-        {this.props.movies.map((movie) => <MovieItem movie={movie}/>)}
+        {this.props.movies.map((movie) => <MovieItem movie={movie} key={movie.id}/>)}
       </div>
     )
   }

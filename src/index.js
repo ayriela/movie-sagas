@@ -31,7 +31,8 @@ function* fetchMovies(action){
   function* fetchDetail(action){
     try{
       const response=yield axios.get(`/detail/${action.payload}`);
-      yield put({type: 'GET_DETAIL', payload: response.data});
+      //query will return a single row so we want to remove that object from the array of results
+      yield put({type: 'GET_DETAIL', payload: response.data[0]});
     } catch {
      console.log('Error in fetchDetail');
     }
@@ -51,7 +52,7 @@ const movies = (state = [], action) => {
 }
 
 //used to store details for specific movie 
-const detail = (state = [], action) => {
+const detail = (state = {}, action) => {
     switch (action.type) {
         case 'GET_DETAIL':
             return action.payload;

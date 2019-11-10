@@ -5,6 +5,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import { CardHeader } from '@material-ui/core';
 import CardActions from "@material-ui/core/CardActions";
 import { Typography } from "@material-ui/core";
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 class MovieItem extends Component {
     state = {
@@ -12,6 +14,7 @@ class MovieItem extends Component {
     }
     getDetails=()=>{
        console.log('get details clicked');
+       this.props.history.push(`/detail/`);
        this.props.dispatch({type: 'FETCH_DETAIL', payload: this.props.movie.id});
     }
   render() {
@@ -30,4 +33,4 @@ class MovieItem extends Component {
   }
 }
 
-export default MovieItem;
+export default connect()(withRouter(MovieItem));
