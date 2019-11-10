@@ -11,14 +11,16 @@ import {withRouter} from 'react-router-dom';
 class ItemDetail extends Component {
   render() {
     return (
-        <div className="detail">
+        <div className="allDetail">
         <img src={this.props.detail.poster} alt={this.props.detail.title} className="detail-poster"/>
+        <div className="detail">
         <h3 className="detail-label">Description: </h3>
-        <p className="detail-description"></p>
+        <Typography className="detail-info">{this.props.detail.description}</Typography>
         <h3 className="detail-label">Genres:</h3>
-        <ul className="detail-genres">
+        <ul className="detail-info">
             {this.props.detail.genres&&this.props.detail.genres.map(genre=><li>{genre}</li>)}
         </ul>
+        </div>
         </div>
     );
   }

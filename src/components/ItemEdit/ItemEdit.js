@@ -7,20 +7,66 @@ import CardActions from "@material-ui/core/CardActions";
 import { Typography } from "@material-ui/core";
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {TextField} from '@material-ui/core';
+import {InputLabel,Select, MenuItem} from '@material-ui/core';
 
 class ItemEdit extends Component {
+    state={
+        description:'',
+        genres:[],
+    }
+    setDescription=(event)=>{
+        this.setState({
+            description: event.target.value,
+        })
+    }
+
+    genreChange=(event)=>{
+        this.setState({
+            genres: event.target.value,
+        })
+    }
+
+    addGenre=()=>{
+
+    }
+
   render() {
     return (
-        <div className="detail">
-            <h2>EDIT THIS</h2>
+        <div className="allEdit">
         <img src={this.props.detail.poster} alt={this.props.detail.title} className="detail-poster"/>
-        <h3 className="detail-label">Description: </h3>
-        <p className="detail-description"></p>
-        <h3 className="detail-label">Genres:</h3>
-        <ul className="detail-genres">
-            {this.props.detail.genres&&this.props.detail.genres.map(genre=><li>{genre}</li>)}
-        </ul>
-        </div>
+        <div className="edit">
+        <TextField
+        id="outlined-multiline-static"
+        label="Description"
+        multiline
+        defaultValue={this.props.detail.description}
+        onChange={this.setDescription}
+        className="textField"
+        margin="normal"
+        variant="outlined"
+        fullWidth
+        color="primary"
+      />
+        
+        
+         <InputLabel id="helper-label">Add a Genre:</InputLabel>
+        <Select
+          labelid="helper-label"
+          id="genre-select"
+          value=''
+          onChange={this.handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+        <Button onClick={this.addGenre}>Add</Button>
+    </div>
+    </div>
     );
   }
 }

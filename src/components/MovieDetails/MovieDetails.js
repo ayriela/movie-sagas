@@ -31,9 +31,11 @@ class MovieItem extends Component {
     return (
         <>
         <h1 className="header">{this.props.detail.title}</h1>
-        <Button onClick={this.toggleDisplay} variant="contained" color="primary" className="right">Edit Movie Details</Button>
+        <Button onClick={()=>this.props.history.push('/movies')} variant="outlined" color="primary" className="right">Back to List</Button>
         {this.state.disp?<ItemDetail />:<ItemEdit />}
-        {JSON.stringify(this.props.detail, null,2)}
+        {this.state.disp?
+        <Button onClick={this.toggleDisplay} variant="contained" color="primary" className="right">Edit Movie Details</Button>
+        :<Button onClick={this.toggleDisplay} variant="contained" color="primary" className="right">Back to Movie Details</Button>}
       
         </>
     );
