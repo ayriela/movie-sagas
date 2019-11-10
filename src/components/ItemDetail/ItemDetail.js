@@ -18,7 +18,7 @@ class ItemDetail extends Component {
         <Typography className="detail-info">{this.props.detail.description}</Typography>
         <h3 className="detail-label">Genres:</h3>
         <ul className="detail-info">
-            {this.props.detail.genres&&this.props.detail.genres.map(genre=><li>{genre}</li>)}
+            {this.props.detail.genres&&this.props.detail.genres.map(genre=><li key={genre}>{genre}</li>)}
         </ul>
         </div>
         </div>

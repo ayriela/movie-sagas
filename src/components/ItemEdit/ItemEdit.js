@@ -8,27 +8,32 @@ import { Typography } from "@material-ui/core";
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {TextField} from '@material-ui/core';
-import {InputLabel,Select, MenuItem} from '@material-ui/core';
+import {InputLabel,Select, MenuItem, FormControl} from '@material-ui/core';
 
 class ItemEdit extends Component {
     state={
-        description:'',
-        genres:[],
+        title: this.props.detail.title,
+        description: this.props.detail.description,
+        genre:'',
     }
-    setDescription=(event)=>{
+    setText=(event,property)=>{
         this.setState({
-            description: event.target.value,
+            [property]: event.target.value,
         })
     }
 
     genreChange=(event)=>{
         this.setState({
-            genres: event.target.value,
+            genre: event.target.value,
         })
     }
 
     addGenre=()=>{
-
+        const toSend={
+            movieId: this.props.detail.id,
+            genreId: this.state.genre,
+        };
+        this.props.dispatch({type: 'FETCH_NEW_GENRE', payload: toSend});
     }
 
   render() {
@@ -37,11 +42,21 @@ class ItemEdit extends Component {
         <img src={this.props.detail.poster} alt={this.props.detail.title} className="detail-poster"/>
         <div className="edit">
         <TextField
+        id="outlined-static"
+        label="Title"
+        defaultValue={this.props.detail.title}
+        onChange={(event)=>this.setText(event, 'title')}
+        className="textField"
+        margin="normal"
+        variant="outlined"
+        color="primary"
+      />
+        <TextField
         id="outlined-multiline-static"
         label="Description"
         multiline
         defaultValue={this.props.detail.description}
-        onChange={this.setDescription}
+        onChange={(event)=>this.setText(event, 'description')}
         className="textField"
         margin="normal"
         variant="outlined"
@@ -49,21 +64,17 @@ class ItemEdit extends Component {
         color="primary"
       />
         
-        
+        {/* <FormControl variant="outlined" className="genre-list"> */}
          <InputLabel id="helper-label">Add a Genre:</InputLabel>
+        <FormControl variant="outlined" style={{minWidth: 120}} className="genre-list">
         <Select
           labelid="helper-label"
           id="genre-select"
-          value=''
-          onChange={this.handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          value={this.state.genre}
+          onChange={this.genreChange}
+        > {this.props.genres.map(genre=><MenuItem value={genre.id} key={genre.id}>{genre.name}</MenuItem>)}
         </Select>
+        </FormControl>
         <Button onClick={this.addGenre}>Add</Button>
     </div>
     </div>

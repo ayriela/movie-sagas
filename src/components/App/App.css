@@ -80,3 +80,11 @@
   float: right;
 }
 
+.textField{
+  float: left;
+}
+
+.genre-list,.helper-label{
+  min-width: 120;
+}
+

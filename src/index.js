@@ -16,6 +16,8 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies);
     yield takeEvery('FETCH_DETAIL', fetchDetail);
+    yield takeEvery('FETCH_GENRE', fetchGenre);
+    yield takeEvery('FETCH_NEW_GENRE', fetchNewGenre);
 }
 
 function* fetchMovies(action){
@@ -35,6 +37,26 @@ function* fetchMovies(action){
       yield put({type: 'GET_DETAIL', payload: response.data[0]});
     } catch {
      console.log('Error in fetchDetail');
+    }
+  }
+
+  function* fetchGenre(action){
+    try{
+      const response=yield axios.get('/genre');
+      yield put({type: 'SET_GENRES', payload: response.data});
+      console.log(response.data);
+    } catch {
+     console.log('Error in fetchGenre');
+    }
+  }
+
+  function* fetchNewGenre(action){
+    try{
+      yield axios.post(`/genre`,action.payload);
+      //query will return a single row so we want to remove that object from the array of results
+      yield put({type: 'FETCH_DETAIL', payload: action.payload.movieId});
+    } catch {
+     console.log('Error in fetchNewGenre');
     }
   }
 
