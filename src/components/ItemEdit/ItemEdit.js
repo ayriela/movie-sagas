@@ -36,6 +36,14 @@ class ItemEdit extends Component {
         this.props.dispatch({type: 'FETCH_NEW_GENRE', payload: toSend});
     }
 
+    addText=()=>{
+        const toSend={
+            title: this.state.title,
+            description: this.state.description,
+        }
+        console.log('ADD BUTTON CLICKED SENDING', toSend);
+    }
+
   render() {
     return (
         <div className="allEdit">
@@ -51,6 +59,7 @@ class ItemEdit extends Component {
         variant="outlined"
         color="primary"
       />
+      
         <TextField
         id="outlined-multiline-static"
         label="Description"
@@ -64,6 +73,7 @@ class ItemEdit extends Component {
         color="primary"
       />
         
+      <div className="genreControls">
         {/* <FormControl variant="outlined" className="genre-list"> */}
          <InputLabel id="helper-label">Add a Genre:</InputLabel>
         <FormControl variant="outlined" style={{minWidth: 120}} className="genre-list">
@@ -75,7 +85,15 @@ class ItemEdit extends Component {
         > {this.props.genres.map(genre=><MenuItem value={genre.id} key={genre.id}>{genre.name}</MenuItem>)}
         </Select>
         </FormControl>
-        <Button onClick={this.addGenre}>Add</Button>
+        <Button onClick={this.addGenre}
+        color="primary"
+        variant="contained"
+        className="add">Add</Button>
+        <Button className="title-description-update right" 
+      onClick={this.addText}
+      color="primary"
+      variant="contained">Update Title/Description Text</Button>
+        </div>
     </div>
     </div>
     );

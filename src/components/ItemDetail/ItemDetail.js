@@ -14,9 +14,9 @@ class ItemDetail extends Component {
         <div className="allDetail">
         <img src={this.props.detail.poster} alt={this.props.detail.title} className="detail-poster"/>
         <div className="detail">
-        <h3 className="detail-label">Description: </h3>
+        <h4 className="detail-label">Description: </h4>
         <Typography className="detail-info">{this.props.detail.description}</Typography>
-        <h3 className="detail-label">Genres:</h3>
+        <h4 className="detail-label">Genres:</h4>
         <ul className="detail-info">
             {this.props.detail.genres&&this.props.detail.genres.map(genre=><li key={genre}>{genre}</li>)}
         </ul>
