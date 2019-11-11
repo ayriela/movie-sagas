@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req,res)=>{
     const queryText = `INSERT INTO "movie_genre" ("genre_id", "movie_id") VALUES ($1, $2)`;
-    console.log(req.body);
+    //console.log(req.body);
     const queryValues=[req.body.genreId, req.body.movieId];
     pool.query(queryText,queryValues)
         .then( () => {
@@ -30,14 +30,5 @@ router.post('/', (req,res)=>{
         });
 
 });
-
-/* function* fetchGenre(action){
-    try{
-      yield axios.post(`/genre/${action.payload.movieId}`, action.payload.genreId);
-      yield put({type: 'FETCH_DETAIL', payload: action.payload.movieId});
-    } catch {
-     console.log('Error in fetchNewGenre');
-    }
-  } */
 
 module.exports = router;
