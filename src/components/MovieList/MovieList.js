@@ -14,7 +14,6 @@ class MovieList extends Component {
     return (
       <div className="flex-container">
         {this.props.movies.map((movie) => <MovieItem movie={movie} key={movie.id}/>)}
-        {JSON.stringify(this.props.genres,null,2)}
       </div>
     )
   }

@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
+//import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects'; 
@@ -45,7 +45,6 @@ function* fetchMovies(action){
     try{
       const response=yield axios.get('/genre');
       yield put({type: 'SET_GENRES', payload: response.data});
-      console.log(response.data);
     } catch {
      console.log('Error in fetchGenre');
     }
@@ -113,7 +112,8 @@ const storeInstance = createStore(
         detail,
     }),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger),
+    //removed logger
+    applyMiddleware(sagaMiddleware),
 );
 
 // Pass rootSaga into our sagaMiddleware
