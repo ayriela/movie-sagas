@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const  axios= require('axios');
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
@@ -30,14 +29,5 @@ router.post('/', (req,res)=>{
         });
 
 });
-
-/* function* fetchGenre(action){
-    try{
-      yield axios.post(`/genre/${action.payload.movieId}`, action.payload.genreId);
-      yield put({type: 'FETCH_DETAIL', payload: action.payload.movieId});
-    } catch {
-     console.log('Error in fetchNewGenre');
-    }
-  } */
 
 module.exports = router;

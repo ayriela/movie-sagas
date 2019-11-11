@@ -14,7 +14,7 @@ class MovieItem extends Component {
     }
     getDetails=()=>{
        console.log('get details clicked');
-       this.props.history.push(`/detail/`);
+       this.props.history.push(`/detail/${this.props.movie.id}`);
        this.props.dispatch({type: 'FETCH_DETAIL', payload: this.props.movie.id});
     }
   render() {

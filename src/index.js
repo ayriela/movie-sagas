@@ -21,7 +21,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_NEW_DETAIL', fetchNewDetail);
 }
 
-function* fetchMovies(action){
+function* fetchMovies(){
     try{
       const response=yield axios.get(`/movies`);
       yield put({type: 'SET_MOVIES', payload: response.data});
@@ -41,7 +41,7 @@ function* fetchMovies(action){
     }
   }
   //grabs the full genre list
-  function* fetchGenre(action){
+  function* fetchGenre(){
     try{
       const response=yield axios.get('/genre');
       yield put({type: 'SET_GENRES', payload: response.data});
