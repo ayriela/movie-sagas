@@ -38,10 +38,11 @@ class ItemEdit extends Component {
 
     addText=()=>{
         const toSend={
+            movieId: this.props.detail.id,
             title: this.state.title,
             description: this.state.description,
         }
-        console.log('ADD BUTTON CLICKED SENDING', toSend);
+        this.props.dispatch({type: 'FETCH_NEW_DETAIL', payload: toSend});
     }
 
   render() {

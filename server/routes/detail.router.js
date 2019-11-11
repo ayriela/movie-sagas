@@ -45,4 +45,19 @@ router.get('/:id', (req, res) => {
 });
 
 
+router.put('/', (req, res) => {
+    const queryText = `UPDATE movies SET title=$2, description=$3
+    WHERE id=$1`;
+    const queryValues=[req.body.movieId, req.body.title, req.body.description];
+    pool.query(queryText, queryValues)
+        .then( (result) => {
+            res.sendStatus(200);
+        })
+        .catch( (error) => {
+            console.log(`Error on update details query ${error}`);
+            res.sendStatus(500);
+        });
+});
+
+
 module.exports = router;

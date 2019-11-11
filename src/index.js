@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_DETAIL', fetchDetail);
     yield takeEvery('FETCH_GENRE', fetchGenre);
     yield takeEvery('FETCH_NEW_GENRE', fetchNewGenre);
+    yield takeEvery('FETCH_NEW_DETAIL', fetchNewDetail);
 }
 
 function* fetchMovies(action){
@@ -29,7 +30,7 @@ function* fetchMovies(action){
     }
   }
 
-
+  //grabs the selected movie's details
   function* fetchDetail(action){
     try{
       const response=yield axios.get(`/detail/${action.payload}`);
@@ -39,7 +40,7 @@ function* fetchMovies(action){
      console.log('Error in fetchDetail');
     }
   }
-
+  //grabs the full genre list
   function* fetchGenre(action){
     try{
       const response=yield axios.get('/genre');
@@ -49,17 +50,27 @@ function* fetchMovies(action){
      console.log('Error in fetchGenre');
     }
   }
-
+  //runs when a genre is added
   function* fetchNewGenre(action){
     try{
       yield axios.post(`/genre`,action.payload);
-      //query will return a single row so we want to remove that object from the array of results
+      //grab the movie's updated details
       yield put({type: 'FETCH_DETAIL', payload: action.payload.movieId});
     } catch {
      console.log('Error in fetchNewGenre');
     }
   }
 
+   //runs when change to details or title is submitted
+   function* fetchNewDetail(action){
+    try{
+      yield axios.put(`/detail`, action.payload);
+      //grab the movie's updated details
+      yield put({type: 'FETCH_DETAIL', payload: action.payload.movieId});
+    } catch {
+     console.log('Error in fetchNewDetail');
+    }
+  }
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
